@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json()
         const { token } = reqBody
         //the problem is at this point that is during the signup itself 
+        console.log(token)
         const user = await User.findOne({ verifyToken: token, verifyTokenExpiry: { $gt: Date.now() } })
         console.log(user)
         if (!user) {
