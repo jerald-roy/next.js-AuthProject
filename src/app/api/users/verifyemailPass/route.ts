@@ -9,8 +9,9 @@ export async function POST(request:NextRequest) {
         const { token, password } = reqBody
         const salt = await bcrypt.genSalt(10)
         const hashedPassowrd = await bcrypt.hash(password, salt)
+         const decodedToken = decodeURIComponent(token);
         //FIRST I NEED TO COMPARE THE TOKEN
-        const user = await User.findOne({ forgotPasswordToken: token, forgotPasswordTokenExpiry: { $gt: Date.now() } })
+        const user = await User.findOne({ forgotPasswordToken: decodedToken, forgotPasswordTokenExpiry: { $gt: Date.now() } })
         if (!user) {
             return NextResponse.json({error:"Invalid token"} , {status:400})
         }
