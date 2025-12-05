@@ -23,7 +23,9 @@ export default function SignUp() {
             const response = await axios.post('/api/users/signUp', user)
             // console.log(response)
             console.log("SignUp success", response.data.message)
-            toast.success("check your email!");
+            toast.success("check your email!", {
+                duration: 8000
+            });
             
            
         } catch (err: unknown) {
@@ -67,7 +69,8 @@ export default function SignUp() {
             value={user.email}
             onChange={(e) => setUser({ ...user, email: e.target.value })}
             placeholder="email"
-            className="border border-white  p-3  focus:outline-none rounded-lg max-sm:pl-1 max-sm:pr-1"
+                    className="border border-white  p-3  focus:outline-none rounded-lg max-sm:pl-1 max-sm:pr-1"
+                    autoComplete="off"
         ></input>
             </div>
             <div className="flex flex-col pb-6">

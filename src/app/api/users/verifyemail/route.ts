@@ -1,17 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/src/dbConfig/dbConfig"
+// import { connect } from "@/src/dbConfig/dbConfig"
 import User from "@/src/models/userModel";
+
+
+
 connect()
 
 
 export async function POST(request: NextRequest) {
     try {
-        
+        console.log("inside")
         const reqBody = await request.json()
         const { token } = reqBody
         //the problem is at this point that is during the signup itself 
         const user = await User.findOne({ verifyToken: token, verifyTokenExpiry: { $gt: Date.now() } })
-        
+        console.log("hello")
         if (!user) {
             return NextResponse.json({error:"Invalid Token"},{status:400})
         }
