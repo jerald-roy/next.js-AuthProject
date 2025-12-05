@@ -19,7 +19,7 @@ export default function VerifyEmailPage() {
             async function verifyUserEmail() {
                 try {
               console.log("just before connection")
-                    const response = await axios.post('/api/users/verifyemail', token)
+                    const response = await axios.post('/api/users/verifyemail', {token})
                     console.log(response)
                     console.log("after the connection")
             
