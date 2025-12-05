@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
         const { token } = reqBody
         //the problem is at this point that is during the signup itself 
         const user = await User.findOne({ verifyToken: token, verifyTokenExpiry: { $gt: Date.now() } })
-        console.log("hello")
+        console.log(user)
         if (!user) {
             return NextResponse.json({error:"Invalid Token"},{status:400})
         }
@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
         user.verifyToken = undefined
         user.verifyTokenExpiry = undefined
      
+        console.log("hello2")
         await user.save()
   
         return NextResponse.json({
